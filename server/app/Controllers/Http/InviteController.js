@@ -1,38 +1,28 @@
 'use strict'
 
+const Invite = use('App/Models/Invite')
+
 /**
  * Resourceful controller for interacting with invites
  */
 class InviteController {
 	/**
-	 * Show a list of all invites.
-	 * GET invites
-	 */
-	async index({ request, response, view }) {}
-
-	/**
 	 * Create/save a new invite.
 	 * POST invites
 	 */
-	async store({ request, response }) {}
+	async store({ request, auth }) {
+		const invites = request.input('invites')
 
-	/**
-	 * Display a single invite.
-	 * GET invites/:id
-	 */
-	async show({ params, request, response, view }) {}
+		const serializedInvites = invites.map(email => ({
+			email,
+			user_id: auth.user.id,
+			team_id: request.team.id,
+		}))
 
-	/**
-	 * Update invite details.
-	 * PUT or PATCH invites/:id
-	 */
-	async update({ params, request, response }) {}
+		Invite.createMany(serializedInvites)
 
-	/**
-	 * Delete a invite with id.
-	 * DELETE invites/:id
-	 */
-	async destroy({ params, request, response }) {}
+		return serializedInvites
+	}
 }
 
 module.exports = InviteController
