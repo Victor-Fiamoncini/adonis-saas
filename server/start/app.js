@@ -21,6 +21,8 @@ const providers = [
 	'@adonisjs/redis/providers/RedisProvider',
 	'@adonisjs/mail/providers/MailProvider',
 	'@adonisjs/framework/providers/ViewProvider',
+	'@adonisjs/validator/providers/ValidatorProvider',
+	'adonis-acl/providers/AclProvider',
 ]
 
 /*
@@ -35,6 +37,7 @@ const providers = [
 const aceProviders = [
 	'@adonisjs/lucid/providers/MigrationsProvider',
 	'adonis-kue/providers/CommandsProvider',
+	'adonis-acl/providers/CommandsProvider',
 ]
 
 /*
